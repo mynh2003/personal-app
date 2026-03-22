@@ -1,0 +1,11 @@
+import logger from "../config/logger.js";
+
+const errorHandle = (err, req, res, next) => {
+  logger.error(err.stack);
+
+  res.status(err.status || 500).json({
+    message: err.message || "Internal Server Error",
+  });
+};
+
+export default errorHandle;

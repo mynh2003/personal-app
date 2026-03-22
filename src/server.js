@@ -1,22 +1,15 @@
-import express, { json } from 'express';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+process.env.TZ = "Asia/Ho_Chi_Minh";
 
+import app from "./app.js";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
-const app = express();
-
-app.use(json());
+const PORT = process.env.PORT || 3000;
 
 connectDB();
 
-app.use("/", (req, res)=> {
-   res.json({ message: "HOME PAGE" });
+app.listen(PORT, () => {
+  console.log(`🚀 App start at http://localhost:${PORT}`);
 });
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, ()=>{
-    console.log(`🚀 App start at http://localhost:${PORT}`)
-})
