@@ -1,20 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import logger from "../config/logger.js";
 
 const connectDB = async () => {
-    try {
-        const mongooseUri = await mongoose.connect(process.env.MONGO_URI);
-        
-        if(!mongooseUri){
-            throw new Error("⚠️ Lỗi không lấy được MONGO_URI trong env");
-        }
-  
-        console.log("✅ Kết nối MongoDB thành công!")
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
 
-        
-    } catch (error) {
-        console.log("❌ Lỗi kết nối DB: ", error.message);
-        process.exit(1);
-    }
-}
+    logger.info("✅ MongoDB connected");
+  } catch (error) {
+    logger.error("❌ DB connection failed: " + error.message);
+
+    process.exit(1);
+  }
+};
 
 export default connectDB;
