@@ -1,10 +1,15 @@
 import express from "express";
+import cors from "cors";
+import corsOptions from "./config/cors.js";
 import authRoutes from "./routes/auth.route.js";
 import requestLogger from "./middleware/requestLogger.js";
 import errorLogger from "./middleware/errorLogger.js";
 import errorHandle from "./middleware/errorHandle.js";
 
 const app = express();
+
+app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
